@@ -29,3 +29,20 @@
 
 (define (sqrt a)
     (sqrt-iter 1.0 a))
+
+
+(define (sqrt-iter-improved guess x)
+    (if (improved-good-enough? guess (improve guess x))
+        (improve guess x)
+        (sqrt-iter-improved (improve guess x)
+                    x)))
+
+(define (improved-good-enough? guess new-guess)
+    (> 
+        0.001 
+        (/ 
+            (abs (- guess new-guess)) 
+            guess)))
+
+(define (improved-sqrt x)
+    (sqrt-iter-improved 1.0 x))
